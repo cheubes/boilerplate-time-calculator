@@ -22,10 +22,13 @@ class time :
         self.minutes = m[1]
         h = divmod(self.hours + int(d[0]) + m[0], 12)
         self.hours = h[1]
-        if self.period + h[0] == 2 :
+        p = divmod(self.period + h[0], 2)
+        if p[0] == 1 :
             self.day = ' (next day)'
-        self.period = (self.period + h[0]) % 2
-        if self.hours == 0 and self.period == 1 :
+        if p[0] > 1 :
+            self.day = f' ({p[0]} days later)'
+        self.period = p[1]
+        if self.hours == 0 :
             self.hours = 12
 
     def __str__(self):
