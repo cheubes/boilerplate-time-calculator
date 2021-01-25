@@ -14,11 +14,11 @@ class UnitTests(unittest.TestCase):
         expected = "3:07 PM"
         self.assertEqual(actual, expected, 'Expected calling "add_time()" with "11:55 AM", "3:12" to return "3:07 PM"')
 
-    # def test_next_day(self):
-    #     actual = add_time("9:15 PM", "5:30")
-    #     expected = "2:45 AM (next day)"
-    #     self.assertEqual(actual, expected, 'Expected time to end with "(next day)" when it is the next day.')
-    #
+    def test_next_day(self):
+        actual = add_time("9:15 PM", "5:30")
+        expected = "2:45 AM (next day)"
+        self.assertEqual(actual, expected, 'Expected time to end with "(next day)" when it is the next day.')
+
     # def test_period_change_at_twelve(self):
     #     actual = add_time("11:40 AM", "0:25")
     #     expected = "12:05 PM"

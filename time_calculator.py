@@ -1,11 +1,13 @@
 
 class time :
+
     periods = {0:'AM', 1:'PM'}
     periods_idx = {'AM':0, 'PM':1}
 
     hours = 0
     minutes = 0
     period = 0
+    day = ''
 
     def __init__(self, time_as_string):
         tas = time_as_string.split()
@@ -20,10 +22,13 @@ class time :
         self.minutes = m[1]
         h = divmod(self.hours + int(d[0]) + m[0], 12)
         self.hours = h[1]
+        if self.period + h[0] == 2 :
+            self.day = ' (next day)'
         self.period = (self.period + h[0]) % 2
 
     def __str__(self):
-        return f'{self.hours}:{self.minutes:02d} {self.periods[self.period]}'
+        return f'{self.hours}:{self.minutes:02d} {self.periods[self.period]}{self.day}'
+
 
 def add_time(start, duration, day = None):
 
