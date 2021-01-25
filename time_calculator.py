@@ -8,13 +8,16 @@ class time :
     minutes = 0
     period = 0
     day = ''
+    days_after = ''
 
-    def __init__(self, time_as_string):
+    def __init__(self, time_as_string, day):
         tas = time_as_string.split()
         self.period = self.periods_idx[tas[1]]
         t = tas[0].split(':')
         self.hours = int(t[0])
         self.minutes = int(t[1])
+        if day :
+            self.day = ', ' + day
 
     def add(self, duration):
         d = duration.split(':')
@@ -24,21 +27,20 @@ class time :
         self.hours = h[1]
         p = divmod(self.period + h[0], 2)
         if p[0] == 1 :
-            self.day = ' (next day)'
+            self.days_after = '(next day)'
         if p[0] > 1 :
-            self.day = f' ({p[0]} days later)'
+            self.days_after = f'({p[0]} days later)'
         self.period = p[1]
         if self.hours == 0 :
             self.hours = 12
 
     def __str__(self):
-        return f'{self.hours}:{self.minutes:02d} {self.periods[self.period]}{self.day}'
+        return f'{self.hours}:{self.minutes:02d} {self.periods[self.period]}{self.day} {self.days_after}'.rstrip()
 
 
 def add_time(start, duration, day = None):
 
-    new_time = time(start)
+    new_time = time(start, day)
     new_time.add(duration)
-    print(f'{start} + {duration} = {new_time}')
 
     return str(new_time)
