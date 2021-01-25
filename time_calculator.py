@@ -25,6 +25,8 @@ class time :
         if self.period + h[0] == 2 :
             self.day = ' (next day)'
         self.period = (self.period + h[0]) % 2
+        if self.hours == 0 and self.period == 1 :
+            self.hours = 12
 
     def __str__(self):
         return f'{self.hours}:{self.minutes:02d} {self.periods[self.period]}{self.day}'
